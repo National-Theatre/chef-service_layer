@@ -15,6 +15,7 @@ end
 %w{ NetFx4 NetFx4ServerFeatures NetFx4Extended-ASPNET45 IIS-ASPNET45 IIS-NetFxExtensibility45 }.each do |feature|
   windows_feature feature do
     action :install
+    all true
   end
 end
 
