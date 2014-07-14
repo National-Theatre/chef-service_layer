@@ -82,6 +82,8 @@ end
 template "z:/ServiceLayer.API_deploy/Configuration/NLog.config" do
   source 'NLog.config.erb'
   variables({
-    :minlevel => node['service_layer']['NLog']['minLevel']
+    :minlevel        => node['service_layer']['NLog']['minLevel'],
+    :archiveEvery    => node['service_layer']['NLog']['archiveEvery'],
+    :maxArchiveFiles => node['service_layer']['NLog']['maxArchiveFiles']
   })
 end

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <targets>
-    <target name="RollingLogFileAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.API.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.API.log.{#}" archiveEvery="Day" archiveNumbering="Rolling" maxArchiveFiles="14" concurrentWrites="true" keepFileOpen="false" />
-    <target name="NLogTraceAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Tracing.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="Day" archiveNumbering="Rolling" maxArchiveFiles="14" concurrentWrites="true" keepFileOpen="false" />
-    <target name="InterceptorAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Interceptor.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="Day" archiveNumbering="Rolling" maxArchiveFiles="14" concurrentWrites="true" keepFileOpen="false" />
+    <target name="RollingLogFileAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.API.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.API.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
+    <target name="NLogTraceAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Tracing.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
+    <target name="InterceptorAppender" xsi:type="File" layout="${longdate}|[${level}]|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Interceptor.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
   </targets>
   <rules>
     <logger name="ServiceLayer.WebApi.Infrastructure.TraceWriters.NLogTraceWriter" minlevel="<%= @minlevel %>" writeTo="NLogTraceAppender" final="true" />

@@ -13,4 +13,6 @@ default['service_layer']['AppSettings']['TessituraAnonPword']        = 'changeme
 default['service_layer']['AppSettings']['TessituraWarnTimeout']      = 2000
 default['service_layer']['AppSettings']['TessituraExceptionTimeout'] = 10000
 default['service_layer']['NLog']['minLevel']                         = 'Debug'
+default['service_layer']['NLog']['archiveEvery']                     = 'Day'
+default['service_layer']['NLog']['maxArchiveFiles']                  = 14
 
