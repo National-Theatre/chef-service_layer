@@ -78,3 +78,10 @@ template "z:/ServiceLayer.API_deploy/Configuration/AppSettings.config" do
     :config => node['service_layer']['AppSettings']
   })
 end
+
+template "z:/ServiceLayer.API_deploy/Configuration/NLog.config" do
+  source 'NLog.config.erb'
+  variables({
+    :minlevel => node['service_layer']['NLog']['minLevel']
+  })
+end
