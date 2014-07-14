@@ -71,3 +71,10 @@ if($location){
   EOH
   not_if { ::File.directory?("Z:\\ServiceLayer") }
 end
+
+template "z:/ServiceLayer.API_deploy/Configuration/AppSettings.config" do
+  source 'AppSettings.config.erb'
+  variables({
+    :config => node['service_layer']['AppSettings']
+  })
+end
