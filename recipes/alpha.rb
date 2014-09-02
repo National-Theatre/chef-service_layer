@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: service_layer
-# Recipe:: discovery
+# Recipe:: alpha
 #
 # Copyright 2014, National Theatre
 #
@@ -34,9 +34,9 @@ iis_pool 'service_layer_pool' do
 end 
 #creates a new app
 iis_app "Default Web Site" do
-  path "/ServiceLayer.API_deploy"
+  path "/ServiceLayer.API"
   application_pool "service_layer_pool"
-  physical_path "Z:\\ServiceLayer.API_deploy"
+  physical_path "Z:/ServiceLayer.API_deploy"
   enabled_protocols "http"
   action :add
 end
@@ -71,7 +71,7 @@ if($location){
 }
 & Z:\ServiceLayer\ServiceLayer.API.deploy.cmd "/Y"
   EOH
-  not_if { ::File.directory?("Z:\\ServiceLayer") }
+  not_if { ::File.directory?("Z:/ServiceLayer") }
 end
 
 template "z:/ServiceLayer.API_deploy/Configuration/AppSettings.config" do
