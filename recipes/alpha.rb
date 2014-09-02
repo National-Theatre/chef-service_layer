@@ -9,17 +9,7 @@
 
 include_recipe "service_layer::init_z"
 
-windows_package 'webdeploy' do
-  source node['windows']['webdeploy']
-  action :install
-end
-
-%w{ NetFx4 NetFx4ServerFeatures NetFx4Extended-ASPNET45 IIS-ASPNET45 IIS-NetFxExtensibility45 }.each do |feature|
-  windows_feature feature do
-    action :install
-    all true
-  end
-end
+include_recipe "service_layer::_init"
 
 directory node['service_layer']['path'] do
   action :create

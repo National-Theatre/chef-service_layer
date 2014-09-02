@@ -9,6 +9,8 @@
 
 default['windows']['webdeploy'] = 'http://download.microsoft.com/download/D/4/4/D446D154-2232-49A1-9D64-F5A9429913A4/WebDeploy_amd64_en-US.msi'
 default['service_layer']['path']                                     = 'Z:/ServiceLayer.API_deploy'
+default['service_layer']['iis_pool']                                 = 'service_layer_pool'
+default['service_layer']['URL']                                      = '/ServiceLayer.API'
 default['service_layer']['AppSettings']['TessituraAnonUname']        = 'changeme'
 default['service_layer']['AppSettings']['TessituraAnonPword']        = 'changeme'
 default['service_layer']['AppSettings']['TessituraWarnTimeout']      = 2000

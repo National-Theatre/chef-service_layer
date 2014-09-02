@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-powershell_script "get_code" do
+powershell_script "mount_z" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
 $NewDiskNumber = 1
@@ -25,7 +25,7 @@ ASSIGN LETTER=Z
 $diskpart_command | diskpart
 Format-Volume -DriveLetter Z -FileSystem NTFS -NewFileSystemLabel $NewDiskLabel -Confirm:$false
 
-New-Item -ItemType Directory -Force -Path Z:\Mounted
+New-Item -ItemType Directory -Force -Path Z:\\Mounted
 
   EOH
   not_if { ::File.directory?("Z:/Mounted") }
