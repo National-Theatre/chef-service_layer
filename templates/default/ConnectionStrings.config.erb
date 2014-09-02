@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<connectionStrings>
+  <% @config.each do |key,value| -%>
+    <add name="<%= key %>" connectionString="<%= value %>" />
+  <% end -%>
+</connectionStrings>

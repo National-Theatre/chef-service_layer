@@ -24,7 +24,9 @@ ASSIGN LETTER=Z
 "@
 $diskpart_command | diskpart
 Format-Volume -DriveLetter Z -FileSystem NTFS -NewFileSystemLabel $NewDiskLabel -Confirm:$false
+
 New-Item -ItemType Directory -Force -Path Z:\Mounted
+
   EOH
   not_if { ::File.directory?("Z:/Mounted") }
 end
