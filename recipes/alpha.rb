@@ -24,7 +24,7 @@ iis_pool 'service_layer_pool' do
 end 
 #creates a new app
 iis_app "Default Web Site" do
-  path "/ServiceLayer.API"
+  path "/ServiceLayer.API_deploy"
   application_pool "service_layer_pool"
   physical_path node['service_layer']['path']
   enabled_protocols "http"
