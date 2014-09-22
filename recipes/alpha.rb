@@ -22,13 +22,14 @@ iis_pool 'service_layer_pool' do
   pipeline_mode :Integrated
   action [:add,:start]
 end 
-#creates a new app
-iis_app "Default Web Site" do
-  path "/ServiceLayer.API_deploy"
+# IIS vhost
+iis_site 'Service Layer' do
+  protocol :http
+  port 80
+  path node['service_layer']['path']
+  host_header "api.ntstaging.org.uk"
   application_pool "service_layer_pool"
-  physical_path node['service_layer']['path']
-  enabled_protocols "http"
-  action :add
+  action [:add,:start]
 end
 
 powershell_script "fix_iis_handler" do
