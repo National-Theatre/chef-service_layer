@@ -29,6 +29,7 @@ iis_site 'Service Layer' do
   path node['service_layer']['path']
   host_header "data.ntstaging.org.uk"
   application_pool "service_layer_pool"
+  site_name "Service Layer"
   action [:add,:start]
 end
 
