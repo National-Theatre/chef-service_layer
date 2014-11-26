@@ -13,6 +13,7 @@ template "#{node['service_layer']['path']}/Configuration/AppSettings.config" do
     :config => node['service_layer']['AppSettings']
   })
   notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
 
 template "#{node['service_layer']['path']}/Configuration/NLog.config" do
@@ -23,6 +24,7 @@ template "#{node['service_layer']['path']}/Configuration/NLog.config" do
     :maxArchiveFiles => node['service_layer']['NLog']['maxArchiveFiles']
   })
   notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
 
 template "#{node['service_layer']['path']}/Configuration/ConnectionStrings.config" do
@@ -31,4 +33,5 @@ template "#{node['service_layer']['path']}/Configuration/ConnectionStrings.confi
     :config => node['service_layer']['ConnectionStrings']
   })
   notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
