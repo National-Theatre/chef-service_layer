@@ -35,3 +35,12 @@ template "#{node['service_layer']['path']}/Configuration/ConnectionStrings.confi
   notifies :restart, "iis_site[Service Layer]", :delayed
   notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
+
+template "#{node['service_layer']['path']}/Configuration/Smtp.config" do
+  source 'Smtp.config.erb'
+  variables({
+    :config => node['service_layer']['Smtp']
+  })
+  notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
+end

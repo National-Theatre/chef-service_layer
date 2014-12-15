@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<smtp deliveryMethod="Network">
+  <network 
+    host="<%= @config['host'] %>" 
+    port="<%= @config['port'] %>" 
+    userName="<%= @config['userName'] %>" 
+    password="<%= @config['password'] %>"
+    enableSsl="<%= @config['ssl'] %>"/>
+</smtp>
