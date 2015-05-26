@@ -8,5 +8,5 @@
 #
 
 batch "set_time_gmt" do
-  code "tzutil.exe /s 'GMT Standard Time'"
+  code 'tzutil.exe /s "GMT Standard Time"'
 end
