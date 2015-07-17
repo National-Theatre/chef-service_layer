@@ -25,9 +25,8 @@ end
 # IIS vhost
 iis_site 'Service Layer' do
   protocol :http
-  port 80
   path node['service_layer']['path']
-  host_header "data.ntstaging.org.uk"
+  bindings "http/*:80:data.ntstaging.org.uk,http/*:80:ntapi.ntstaging.org.uk"
   application_pool "service_layer_pool"
   site_name "Service Layer"
   action [:add,:start]
