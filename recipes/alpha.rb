@@ -24,7 +24,6 @@ iis_pool 'service_layer_pool' do
 end 
 # IIS vhost
 iis_site 'Service Layer' do
-  protocol :http
   path node['service_layer']['path']
   bindings "http/*:80:data.ntstaging.org.uk,http/*:80:ntapi.ntstaging.org.uk"
   application_pool "service_layer_pool"
