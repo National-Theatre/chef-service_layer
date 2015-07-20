@@ -1,0 +1,8 @@
+replication:
+   replSetName: <%= @replSetName %>
+systemLog:
+    destination: file
+    path: <%= @data_dir %>\log\mongod.log
+storage:
+    dbPath: <%= @data_dir %>\db
+    engine: wiredTiger

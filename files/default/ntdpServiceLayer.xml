@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension xmlns="urn:newrelic-extension">
+  <instrumentation>
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.BackgroundThreadTracerFactory">
+      <match assemblyName="ServiceLayer.Services" className="ServiceLayer.Services.TessituraWrapper">
+        <exactMethodMatcher methodName="GetBasket" />
+        <exactMethodMatcher methodName="Checkout" />
+        <exactMethodMatcher methodName="SendOrderConfirmationEmail" />
+        <exactMethodMatcher methodName="GetProductions" />
+        <exactMethodMatcher methodName="GetProductionDetails" />
+        <exactMethodMatcher methodName="ReserveTickets" />
+        <exactMethodMatcher methodName="ReserveSpecifiedTickets" />
+        <exactMethodMatcher methodName="ReleaseTickets" />
+        <exactMethodMatcher methodName="Login" />
+        <exactMethodMatcher methodName="LoginWithToken" />
+        <exactMethodMatcher methodName="UpdatePassword" />
+        <exactMethodMatcher methodName="GetNewSessionKey" />
+        <exactMethodMatcher methodName="GetBasketBrief" />
+        <exactMethodMatcher methodName="GetBasketMessaging" />
+        <exactMethodMatcher methodName="GetBasketBriefMessaging" />
+        <exactMethodMatcher methodName="GetEvents" />
+        <exactMethodMatcher methodName="GetPromoCode" />
+        <exactMethodMatcher methodName="UpdateSourceCode" />
+        <exactMethodMatcher methodName="TransferSession" />
+        <exactMethodMatcher methodName="TransferCart" />
+        <exactMethodMatcher methodName="GetPerformanceDetail" />
+        <exactMethodMatcher methodName="GetPerformanceDetailSyos" />
+        <exactMethodMatcher methodName="GetSyosSeats" />
+        <exactMethodMatcher methodName="GetAccountInfo" />
+        <exactMethodMatcher methodName="UpdateAccountInfo" />
+        <exactMethodMatcher methodName="HasOrder" />
+        <exactMethodMatcher methodName="GetAddressAndDeliveryMethods" />
+        <exactMethodMatcher methodName="SetDeliveryMethod" />
+	<exactMethodMatcher methodName="CallLocalProcedure" />
+      </match>
+    </tracerFactory>
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.BackgroundThreadTracerFactory">
+      <match assemblyName="StackExchange.Redis" className="StackExchange.Redis.SocketManager">
+        <exactMethodMatcher methodName="WriteAllQueues" />
+      </match>
+    </tracerFactory>
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.BackgroundThreadTracerFactory">
+      <match assemblyName="StackExchange.Redis" className="StackExchange.Redis.SocketManager">
+        <exactMethodMatcher methodName="Read" />
+      </match>
+    </tracerFactory>
+<!-- try to find Tessitura calls -->
+    <tracerFactory name="NewRelic.Agent.Core.Tracer.Factories.BackgroundThreadTracerFactory" metricName="Controller/Checkout">
+      <match assemblyName="ServiceLayer.API" className="ServiceLayer.API.Controllers.CheckoutsController">
+        <exactMethodMatcher methodName="GetCheckout" />
+        <exactMethodMatcher methodName="PostCheckout" />
+        <exactMethodMatcher methodName="PutCheckout" />
+        <exactMethodMatcher methodName="FinaliseOrder" />
+      </match>
+    </tracerFactory>
+    <tracerFactory metricName="Controller/Checkout">
+      <match assemblyName="ServiceLayer.API" className="ServiceLayer.API.Controllers.CheckoutsController">
+        <exactMethodMatcher methodName="GetProblemFromResultStatus" />
+        <exactMethodMatcher methodName="GetCheckoutHttpResponse" />
+        <exactMethodMatcher methodName="GetPaymentFieldProblemDocument" />
+      </match>
+    </tracerFactory>
+  </instrumentation>
+</extension>
