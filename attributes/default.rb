@@ -36,3 +36,4 @@ default['service_layer']['Smtp']['port']                             = 25
 default['service_layer']['Smtp']['userName']                         = '**SES SMTP username**'
 default['service_layer']['Smtp']['password']                         = '**SES SMTP password**'
 default['service_layer']['Smtp']['ssl']                              = true
+default['service_layer']['code_bucket']                              = 'ntdp-artifact'

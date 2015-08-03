@@ -10,10 +10,10 @@
 windows_package 'mongodb' do
   source "https://fastdl.mongodb.org/win32/mongodb-win32-x86_64-2008plus-ssl-#{node['service_layer']['mongodb']['version']}-signed.msi"
   options 'INSTALLLOCATION="C:\mongodb" ADDLOCAL="MonitoringTools,ImportExportTools,MiscellaneousTools"'
-  remote_file_attributes {
+  remote_file_attributes ({
     :path => "C:\\mongodb.msi",
     :checksum => node['service_layer']['mongodb']['checksum']
-  }
+  })
 end
 
 directory "#{node['service_layer']['mongodb']['data_dir']}/db" do
@@ -28,7 +28,8 @@ template 'C:\mongodb\mongod.cfg' do
   source 'mongod.cfg.erb'
   variables(
     :data_dir => node['service_layer']['mongodb']['data_dir'],
-    :replSetName => node['service_layer']['mongodb']['replSetName']
+    :replSetName => node['service_layer']['mongodb']['replSetName'],
+    :opsProfileMode => node['service_layer']['mongodb']['operationProfiling']['mode']
   )
 end
 

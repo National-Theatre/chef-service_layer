@@ -2,7 +2,7 @@
 # Cookbook Name:: service_layer
 # Recipe:: get_code
 #
-# Copyright 2014, National Theatre
+# Copyright 2015, National Theatre
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -10,7 +10,7 @@
 powershell_script "get_code" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
-Read-S3Object -BucketName ntdp-artifact -Key ServiceLayer.zip -File Z:\\ServiceLayer.zip
+Read-S3Object -BucketName #{node['service_layer']['code_bucket']} -Key ServiceLayer.zip -File Z:\\ServiceLayer.zip
 New-Item -ItemType Directory -Force -Path Z:\\ServiceLayer
 
 $shell=new-object -com shell.application
