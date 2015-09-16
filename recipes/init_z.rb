@@ -20,13 +20,13 @@ ATTRIBUTES DISK CLEAR READONLY
 ONLINE DISK
 CONVERT MBR
 CREATE PARTITION PRIMARY ALIGN=64
-ASSIGN LETTER=Z
+ASSIGN LETTER=#{node['service_layer']['windowsDrive']}
 "@
 $diskpart_command | diskpart
-Format-Volume -DriveLetter Z -FileSystem NTFS -NewFileSystemLabel $NewDiskLabel -Confirm:$false
+Format-Volume -DriveLetter #{node['service_layer']['windowsDrive']} -FileSystem NTFS -NewFileSystemLabel $NewDiskLabel -Confirm:$false
 
-New-Item -ItemType Directory -Force -Path Z:\\Mounted
+New-Item -ItemType Directory -Force -Path #{node['service_layer']['windowsDrive']}:\\Mounted
 
   EOH
-  not_if { ::File.directory?("Z:/Mounted") }
+  not_if { ::File.directory?("#{node['service_layer']['windowsDrive']}:/Mounted") }
 end

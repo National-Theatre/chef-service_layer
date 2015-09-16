@@ -44,3 +44,10 @@ windows_service 'MongoDB' do
   action :configure_startup
   startup_type :automatic
 end
+
+windows_firewall_rule 'MongoDB' do
+  localport '27017'
+  protocol 'TCP'
+  firewall_action :allow
+  profile 'any'
+end
