@@ -10,15 +10,15 @@
 powershell_script "get_code" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
-Read-S3Object -BucketName #{node['service_layer']['code_bucket']} -Key ServiceLayer.zip -File Z:\\ServiceLayer.zip
-New-Item -ItemType Directory -Force -Path Z:\\ServiceLayer
+Read-S3Object -BucketName #{node['service_layer']['code_bucket']} -Key ServiceLayer.zip -File #{node['service_layer']['windowsDrive']}:\\ServiceLayer.zip
+New-Item -ItemType Directory -Force -Path #{node['service_layer']['windowsDrive']}:\\ServiceLayer
 
 $shell=new-object -com shell.application
-$location=$shell.namespace('Z:\\ServiceLayer')
+$location=$shell.namespace('#{node['service_layer']['windowsDrive']}:\\ServiceLayer')
  
 # test the root folder now does exist, extract if it does.
 if($location){
-     $zipFiles = get-childitem Z:\\ServiceLayer.zip
+     $zipFiles = get-childitem #{node['service_layer']['windowsDrive']}:\\ServiceLayer.zip
      Write-Host "Number of ZIPs=$($zipFiles.count)" -fore yellow -back black
  
      foreach($zipFile in $ZipFiles){
@@ -33,13 +33,13 @@ if($location){
 }
 
   EOH
-  not_if { ::File.directory?("Z:/ServiceLayer") }
+  not_if { ::File.directory?("#{node['service_layer']['windowsDrive']}:/ServiceLayer") }
 end
 
 batch "run_installer batch" do
-  cwd 'Z:\\ServiceLayer'
+  cwd "#{node['service_layer']['windowsDrive']}:\\ServiceLayer"
   code <<-EOH
-Z:\\ServiceLayer\\ServiceLayer.API.deploy.cmd "/Y"
+#{node['service_layer']['windowsDrive']}:\\ServiceLayer\\ServiceLayer.API.deploy.cmd "/Y"
   EOH
   not_if { ::File.directory?("#{node['service_layer']['path']}/Configuration") }
 end
@@ -47,14 +47,14 @@ end
 powershell_script "run_installer" do
   cwd Chef::Config[:file_cache_path]
   code <<-EOH
-  & Z:/ServiceLayer/ServiceLayer.API.deploy.cmd "/Y"
+  & #{node['service_layer']['windowsDrive']}:/ServiceLayer/ServiceLayer.API.deploy.cmd "/Y"
   EOH
   not_if { ::File.directory?("#{node['service_layer']['path']}/Configuration") }
 end
 
 ruby_block "run_installer ruby" do
   block do
-    if system('Z:\\ServiceLayer\\ServiceLayer.API.deploy.cmd "/Y"')
+    if system("#{node['service_layer']['windowsDrive']}:\\ServiceLayer\\ServiceLayer.API.deploy.cmd \"/Y\"")
       print 'TRUE!!!!'
     else
       print 'FALSE!!!!'
