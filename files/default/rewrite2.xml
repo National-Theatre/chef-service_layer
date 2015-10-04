@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appcmd>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/allowedServerVariables" path="MACHINE/WEBROOT/APPHOST/Service Layer" overrideMode="Inherit" locked="true">
+        <system.webServer-rewrite-allowedServerVariables>
+            <add name="RESPONSE_SERVER" />
+        </system.webServer-rewrite-allowedServerVariables>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/outboundRules" path="MACHINE/WEBROOT/APPHOST/Service Layer" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-outboundRules>
+            <customTags>
+            </customTags>
+            <preConditions>
+            </preConditions>
+            <rule name="Remove Server Header">
+                <match serverVariable="RESPONSE_SERVER" pattern=".*" />
+                <conditions>
+                </conditions>
+                <action type="Rewrite" />
+            </rule>
+        </system.webServer-rewrite-outboundRules>
+    </CONFIG>
+</appcmd>
