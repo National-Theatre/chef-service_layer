@@ -44,3 +44,21 @@ template "#{node['service_layer']['path']}/Configuration/Smtp.config" do
   notifies :restart, "iis_site[Service Layer]", :delayed
   notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
+
+template "#{node['service_layer']['path']}/Configuration/system.servicemodel.bindings.config" do
+  source 'system.servicemodel.bindings.config.erb'
+  variables({
+    :config => node['service_layer']['Smtp']
+  })
+  notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
+end
+
+template "#{node['service_layer']['path']}/Configuration/system.servicemodel.client.config" do
+  source 'system.servicemodel.client.config.erb'
+  variables({
+    :config => node['service_layer']['Smtp']
+  })
+  notifies :restart, "iis_site[Service Layer]", :delayed
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
+end

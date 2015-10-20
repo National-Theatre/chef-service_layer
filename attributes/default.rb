@@ -38,3 +38,5 @@ default['service_layer']['Smtp']['userName']                         = '**SES SM
 default['service_layer']['Smtp']['password']                         = '**SES SMTP password**'
 default['service_layer']['Smtp']['ssl']                              = true
 default['service_layer']['code_bucket']                              = 'ntdp-artifact'
+default['service_layer']['servicemodel']['QAS_host']                 = 'http://qas.ntstaging.org.uk:2021/'
+default['service_layer']['servicemodel']['Tessituria_host']          = 'https://localhost/tessitura.asmx'

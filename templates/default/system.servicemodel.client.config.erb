@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<client>
+  <endpoint address="<%= @config['Tessituria_host'] %>" binding="basicHttpBinding" bindingConfiguration="TessituraSoap" contract="Tessitura.TessituraSoap" name="TessituraSoap" />
+  <endpoint address="<%= @config['QAS_host'] %>" binding="basicHttpBinding" bindingConfiguration="QASSoap" contract="QAS.QAPortType" name="QASSoap" />
+</client>

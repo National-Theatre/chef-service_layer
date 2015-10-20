@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<bindings>
+  <basicHttpBinding>
+    <binding name="TessituraSoap" maxReceivedMessageSize="20000000" maxBufferSize="20000000" maxBufferPoolSize="20000000">
+      <security mode="Transport" />
+      <readerQuotas maxDepth="32" maxArrayLength="200000000" maxStringContentLength="200000000" />
+    </binding>
+    <binding name="TessituraSoap1" />
+    <binding name="QASSoap" maxReceivedMessageSize="20000000" maxBufferSize="20000000" maxBufferPoolSize="20000000">
+      <readerQuotas maxDepth="32" maxArrayLength="200000000" maxStringContentLength="200000000" />
+    </binding>
+  </basicHttpBinding>
+</bindings>
