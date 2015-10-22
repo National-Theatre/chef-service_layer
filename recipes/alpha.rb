@@ -35,6 +35,10 @@ powershell_script "fix_iis_handler" do
   code "Set-WebConfiguration //System.webServer/handlers -metadata overrideMode -value Allow -PSPath IIS:/"
 end
 
+powershell_script "fix_iis_rew" do
+  code "Set-WebConfiguration //System.webServer/rewrite/allowedServerVariables -metadata overrideMode -value Allow -PSPath IIS:/"
+end
+
 include_recipe "service_layer::get_code"
 
 include_recipe "service_layer::app_config"
