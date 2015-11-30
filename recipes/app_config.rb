@@ -62,3 +62,7 @@ template "#{node['service_layer']['path']}/Configuration/system.servicemodel.cli
   notifies :restart, "iis_site[Service Layer]", :delayed
   notifies :restart, "iis_pool[service_layer_pool]", :delayed
 end
+
+iis_config "/section:applicationPools /[name='service_layer_pool'].processModel.idleTimeout:0" do
+    action :set
+end

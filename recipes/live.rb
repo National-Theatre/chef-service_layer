@@ -25,7 +25,7 @@ end
 # IIS vhost
 iis_site 'Service Layer' do
   path node['service_layer']['path']
-  bindings "http/*:80:ntapi.nationaltheatre.org.uk"
+  bindings "http/*:80:ntapi.nationaltheatre.org.uk,http/*:80:localhost"
   application_pool "service_layer_pool"
   site_name "Service Layer"
   action [:add,:start]
