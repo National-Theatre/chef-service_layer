@@ -27,3 +27,11 @@ windows_package "Install New Relic .NET Agent" do
   notifies :restart, "iis_pool[service_layer_pool]", :delayed
   not_if { ::File.directory?('C:\\Program Files\\New Relic\\.NET Agent') }
 end
+
+powershell_script "reset_iis" do
+  code <<-EOH
+  iisreset
+  New-Item c:\newrelic.txt -type file
+  EOH
+  not_if { ::File.exists?("C:\\newrelic.txt") }
+end

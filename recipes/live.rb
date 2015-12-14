@@ -16,12 +16,6 @@ directory node['service_layer']['path'] do
   not_if { ::File.directory?(node['service_layer']['path']) }
 end
 
-#creates a new app pool
-iis_pool 'service_layer_pool' do
-  runtime_version "4.0"
-  pipeline_mode :Integrated
-  action [:add,:start]
-end 
 # IIS vhost
 iis_site 'Service Layer' do
   path node['service_layer']['path']

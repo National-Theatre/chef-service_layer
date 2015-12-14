@@ -18,3 +18,12 @@ end
     all true
   end
 end
+
+#creates a new app pool
+iis_pool 'service_layer_pool' do
+  runtime_version "4.0"
+  pipeline_mode :Integrated
+  action [:add,:start]
+  idle_timeout '00:00:00'
+  idle_timeout_action :Suspend
+end
