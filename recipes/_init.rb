@@ -25,5 +25,4 @@ iis_pool 'service_layer_pool' do
   pipeline_mode :Integrated
   action [:add,:start]
   idle_timeout '00:00:00'
-  idle_timeout_action :Suspend
 end

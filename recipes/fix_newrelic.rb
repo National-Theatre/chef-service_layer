@@ -31,7 +31,7 @@ end
 powershell_script "reset_iis" do
   code <<-EOH
   iisreset
-  New-Item c:\newrelic.txt -type file
+  New-Item -Force -type file C:\\newrelic.txt 
   EOH
   not_if { ::File.exists?("C:\\newrelic.txt") }
 end
