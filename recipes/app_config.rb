@@ -66,3 +66,11 @@ end
 #iis_config "/section:applicationPools /[name='service_layer_pool'].processModel.idleTimeout:0.00:00:00" do
 #    action :set
 #end
+
+template "%PROGRAMFILES%\Amazon\Ec2ConfigService\Settings\AWS.EC2.Windows.CloudWatch.json" do
+  source 'AWS.EC2.Windows.CloudWatch.json.erb'
+  variables({
+    :path => "#{node['service_layer']['path']}\\\\logs"
+  })
+  notifies :restart, "iis_pool[service_layer_pool]", :delayed
+end
