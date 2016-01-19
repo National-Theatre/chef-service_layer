@@ -67,10 +67,14 @@ end
 #    action :set
 #end
 
+windows_service 'ec2config' do
+  action :nothing
+end
+
 template "%PROGRAMFILES%\Amazon\Ec2ConfigService\Settings\AWS.EC2.Windows.CloudWatch.json" do
   source 'AWS.EC2.Windows.CloudWatch.json.erb'
   variables({
     :path => "#{node['service_layer']['path']}\\\\logs"
   })
-  notifies :restart, "iis_pool[service_layer_pool]", :delayed
+  notifies :restart, "windows_service[ec2config]", :delayed
 end
