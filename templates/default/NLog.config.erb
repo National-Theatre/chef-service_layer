@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <targets>
-    <target name="RollingLogFileAppender" xsi:type="File" encoding="utf-8" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}|${exception:format=tostring}" fileName="${basedir}\logs\ServiceLayer.API.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.API.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
-    <target name="NLogTraceAppender" xsi:type="File" encoding="utf-8" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Tracing.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
-    <target name="HangfireAppender" xsi:type="File" encoding="utf-8" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}|${exception:format=tostring}" fileName="${basedir}\logs\FireAndForget.log" archiveFileName="${basedir}\logs\archives\FireAndForget.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
-    <target name="InterceptorAppender" xsi:type="File" encoding="utf-8" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Interceptor.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="Rolling" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
+    <target name="RollingLogFileAppender" xsi:type="File" encoding="utf-8" lineEnding="CRLF" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}|${exception:format=tostring}" fileName="${basedir}\logs\ServiceLayer.API.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.API.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="DateAndSequence" archiveDateFormat="yyyyMMdd" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
+    <target name="NLogTraceAppender" xsi:type="File" encoding="utf-8" lineEnding="CRLF" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Tracing.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Tracing.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="DateAndSequence" maxArchiveFiles="<%= @maxArchiveFiles %>" archiveDateFormat="yyyyMMdd" concurrentWrites="true" keepFileOpen="false" />
+    <target name="PerformanceAppender" xsi:type="File" encoding="utf-8" lineEnding="CRLF" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Performance.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Performance.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="DateAndSequence" archiveDateFormat="yyyyMMdd" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
+    <target name="HangfireAppender" xsi:type="File" encoding="utf-8" lineEnding="CRLF" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}|${exception:format=tostring}" fileName="${basedir}\logs\FireAndForget.log" archiveFileName="${basedir}\logs\archives\FireAndForget.log.{#}" archiveEvery="Day" archiveNumbering="Date" archiveDateFormat="yyyyMMdd" maxArchiveFiles="14" concurrentWrites="true" keepFileOpen="false" />
+    <target name="InterceptorAppender" xsi:type="File" encoding="utf-8" lineEnding="CRLF" layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" fileName="${basedir}\logs\ServiceLayer.Interceptor.log" archiveFileName="${basedir}\logs\archives\ServiceLayer.Interceptor.log.{#}" archiveEvery="<%= @archiveEvery %>" archiveNumbering="DateAndSequence" archiveDateFormat="yyyyMMdd" maxArchiveFiles="<%= @maxArchiveFiles %>" concurrentWrites="true" keepFileOpen="false" />
     <target name="NewRelicAppender" xsi:type="MethodCall" methodName="NoticeError"
           className="ServiceLayer.Services.Notifications.NewRelicLogger, ServiceLayer.Services">
-      <parameter layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}" name="message"/>
+      <parameter layout="${longdate}|[${level}]|R:${mdlc:item=requestId}|${callsite}|${message}|${exception:format=tostring}" name="message"/>
     </target>
   </targets>
   <rules>
@@ -18,9 +19,10 @@
         <when condition="not starts-with('${mdlc:item=requestId}','Job')" action="Ignore"/>
       </filters>
     </logger>
-    <logger name="ServiceLayer.WebApi.Infrastructure.TraceWriters.NLogTraceWriter" minlevel="<%= @minlevel %>" writeTo="NLogTraceAppender" final="true" />
-    <logger name="ServiceLayer.API.Interceptors.*" minlevel="<%= @minlevel %>" writeTo="InterceptorAppender" final="true" />
-    <logger name="*" minlevel="<%= @minlevel %>" writeTo="RollingLogFileAppender" />
+    <logger name="Performance" minlevel="Trace" writeTo="PerformanceAppender" final="true" />
+    <logger name="ServiceLayer.WebApi.Infrastructure.TraceWriters.NLogTraceWriter" minlevel="Debug" writeTo="NLogTraceAppender" final="true" />
+    <logger name="ServiceLayer.API.Interceptors.*" minlevel="Debug" writeTo="InterceptorAppender" final="true" />
+    <logger name="*" minlevel="Debug" writeTo="RollingLogFileAppender" />
     <logger name="*" minlevel="Warn" writeTo="NewRelicAppender" />
   </rules>
 </nlog>
