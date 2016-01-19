@@ -6,7 +6,7 @@
                 "Id": "SLNLog",
                 "FullName": "AWS.EC2.Windows.CloudWatch.CustomLog.CustomLogInputComponent,AWS.EC2.Windows.CloudWatch",
                 "Parameters": {
-                    "LogDirectoryPath": "<%= @path %>\\\\",
+                    "LogDirectoryPath": "<%= @path %>\\",
                     "TimestampFormat": "yyyy-MM-dd HH:mm:ss.ff",
                     "Encoding": "UTF-8",
                     "Filter": "",
@@ -121,7 +121,7 @@
             "Flows": 
             [
                 "(ApplicationEventLog,SystemEventLog),CloudWatchLogs",
-                "SLNLog,ServiceLayerCloudWatchLogs"
+                "(SLNLog,IISLogs),ServiceLayerCloudWatchLogs"
             ]
         }
     } 

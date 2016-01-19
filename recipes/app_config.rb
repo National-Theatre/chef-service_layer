@@ -68,13 +68,13 @@ end
 #end
 
 windows_service 'ec2config' do
-  action :nothing
+  action :start
 end
 
-template "%PROGRAMFILES%\Amazon\Ec2ConfigService\Settings\AWS.EC2.Windows.CloudWatch.json" do
+template "C:\\Program Files\\Amazon\\Ec2ConfigService\\Settings\\AWS.EC2.Windows.CloudWatch.json" do
   source 'AWS.EC2.Windows.CloudWatch.json.erb'
   variables({
-    :path => "#{node['service_layer']['path']}\\\\logs"
+    :path => "#{node['service_layer']['windowsDrive']}:\\\\ServiceLayer.API_deploy\\\\logs"
   })
   notifies :restart, "windows_service[ec2config]", :delayed
 end
