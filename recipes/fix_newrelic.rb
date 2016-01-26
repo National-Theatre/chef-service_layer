@@ -38,6 +38,11 @@ template "C:\\ProgramData\\New Relic\\.NET Agent\\newrelic.config" do
   notifies :restart, "powershell_script[reset_iis]", :delayed
 end
 
+template "C:\\ProgramData\\New Relic\\.NET Agent\\Extensions\\ServiceLayerInstrumentation.xml" do
+  source 'ServiceLayerInstrumentation.xml.erb'
+  notifies :restart, "powershell_script[reset_iis]", :delayed
+end
+
 powershell_script "reset_iis" do
   code <<-EOH
   iisreset
