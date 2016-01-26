@@ -25,13 +25,22 @@ windows_package "Install New Relic .NET Agent" do
 #  recipe_name "dotnet_agent"
   notifies :restart, "iis_site[Service Layer]", :delayed
   notifies :restart, "iis_pool[service_layer_pool]", :delayed
+  notifies :restart, "powershell_script[reset_iis]", :delayed
   not_if { ::File.directory?('C:\\Program Files\\New Relic\\.NET Agent') }
+end
+
+template "C:\\ProgramData\\New Relic\\.NET Agent\\newrelic.config" do
+  source 'newrelic.config.erb'
+  variables({
+    :licenseKey => node['newrelic']['license'],
+    :AsyncMode => node['service_layer']['newrelic']['async']
+  })
+  notifies :restart, "powershell_script[reset_iis]", :delayed
 end
 
 powershell_script "reset_iis" do
   code <<-EOH
   iisreset
-  New-Item -Force -type file C:\\newrelic.txt 
   EOH
-  not_if { ::File.exists?("C:\\newrelic.txt") }
+  action :nothing
 end
