@@ -33,7 +33,8 @@ template "C:\\ProgramData\\New Relic\\.NET Agent\\newrelic.config" do
   source 'newrelic.config.erb'
   variables({
     :licenseKey => node['newrelic']['license'],
-    :AsyncMode => node['service_layer']['newrelic']['async']
+    :AsyncMode => node['service_layer']['newrelic']['async'],
+    :LogLevel => node['service_layer']['newrelic']['LogLevel']
   })
   notifies :run, "powershell_script[reset_iis]", :delayed
 end

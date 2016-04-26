@@ -41,3 +41,4 @@ default['service_layer']['code_bucket']                              = 'ntdp-art
 default['service_layer']['servicemodel']['QAS_host']                 = 'http://qas.ntstaging.org.uk:2021/'
 default['service_layer']['servicemodel']['Tessituria_host']          = 'https://localhost/tessitura.asmx'
 default['service_layer']['newrelic']['async']                        = false
+default['service_layer']['newrelic']['LogLevel']                     = 'info'
