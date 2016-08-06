@@ -1,10 +1,14 @@
+# MongoDB configuration for NTDP
 replication:
    replSetName: <%= @replSetName %>
 systemLog:
     destination: file
+    logAppend: true
     path: <%= @data_dir %>\log\mongod.log
 storage:
     dbPath: <%= @data_dir %>\db
+    journal:
+      enabled: true
     engine: wiredTiger
 operationProfiling:
     mode: <%= @opsProfileMode %>
