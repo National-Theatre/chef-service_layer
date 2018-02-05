@@ -8,7 +8,7 @@
 #
 
 remote_file 'C:\\NewRelicDotNetAgent_x64.msi' do
-  source 'https://download.newrelic.com/dot_net_agent/release/NewRelicDotNetAgent_x64.msi'
+  source 'https://download.newrelic.com/dot_net_agent/latest_release/NewRelicDotNetAgent_x64.msi'
   action :create
 end
 
