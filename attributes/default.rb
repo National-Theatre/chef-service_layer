@@ -2,7 +2,7 @@
 # Cookbook Name:: service_layer
 # Attributes:: discovery
 #
-# Copyright 2014, National Theatre
+# Copyright 2014-2018, National Theatre
 #
 # All rights reserved - Do Not Redistribute
 #
@@ -12,10 +12,20 @@ default['service_layer']['windowsDrive']                             = 'Z'
 default['service_layer']['path']                                     = 'Z:\\ServiceLayer.API_deploy'
 default['service_layer']['iis_pool']                                 = 'service_layer_pool'
 default['service_layer']['URL']                                      = '/ServiceLayer.API'
-default['service_layer']['AppSettings']['TessituraAnonUname']        = 'changeme'
-default['service_layer']['AppSettings']['TessituraAnonPword']        = 'changeme'
+default['service_layer']['AppSettings']['TessituraAnonPword']            = 'changeme'
+default['service_layer']['AppSettings']['TessituraAnonUname']            = 'changeme'
+default['service_layer']['AppSettings']['TessituraExceptionTimeout']     = 10000
+default['service_layer']['AppSettings']['TessituraRestTimeout']          = 10
+
+# Tessitura attributes for REST.
+default['service_layer']['AppSettings']['TessituraRestUrl']              = 'https://api.example.com/TessituraService/'
+default['service_layer']['AppSettings']['TessituraRestUserGroup']        = 'UserGroup'
+default['service_layer']['AppSettings']['TessituraRestUserMachineName']  = 'MachineName'
+default['service_layer']['AppSettings']['TessituraRestUserName']         = 'admin'
+default['service_layer']['AppSettings']['TessituraRestUserPassword']     = 'changeme'
+default['service_layer']['AppSettings']['TessituraRestValidateResponse'] = false
+
 default['service_layer']['AppSettings']['TessituraWarnTimeout']      = 2000
-default['service_layer']['AppSettings']['TessituraExceptionTimeout'] = 10000
 default['service_layer']['AppSettings']['ApiRootClientTimeout']      = 60
 default['service_layer']['AppSettings']['ApiRootServerTimeout']      = 60
 default['service_layer']['AppSettings']['WhatsOnClientTimeout']      = 60
