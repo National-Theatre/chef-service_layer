@@ -1,10 +1,10 @@
 name             'service_layer'
 maintainer       'National Theatre'
-maintainer_email 'laustin@nationaltheatre.org.uk'
+maintainer_email 'National-Theatre@users.noreply.github.com'
 license          'All rights reserved'
 description      'Installs/Configures service_layer'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.2.18'
+version          '0.2.19'
 supports         'windows'
 depends          'iis'
 depends          'windows'
